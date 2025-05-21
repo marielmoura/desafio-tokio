@@ -1,9 +1,8 @@
 package com.tokiomarine.financial_transfer_scheduler.service;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.tokiomarine.financial_transfer_scheduler.dto.TransferRequestDTO;
@@ -28,10 +27,9 @@ public class TransferService {
 		return repository.save(transfer).toDto();
 	}
 
-	public Set<TransferResponseDTO> listAll() {
-		return repository.findAll()
-				.stream()
-				.map(Transfer::toDto)
-				.collect(Collectors.toSet());
+	public Page<TransferResponseDTO> listAll(Pageable pageable) {
+		return repository.findAll(pageable)
+				.map(Transfer::toDto);
 	}
+
 }

@@ -1,4 +1,11 @@
 services:
+  app:
+    build: .
+    container_name: financial-transfer-scheduler
+    ports:
+      - "8080:8080"
+    depends_on:
+      - h2
   h2:
     image: oscarfonts/h2
     container_name: h2-db

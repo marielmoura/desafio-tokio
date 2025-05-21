@@ -7,12 +7,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.tokiomarine.financial_transfer_scheduler.dto.TransferRequestDTO;
 import com.tokiomarine.financial_transfer_scheduler.exception.InvalidTransferException;
 import com.tokiomarine.financial_transfer_scheduler.model.Transfer;
 import com.tokiomarine.financial_transfer_scheduler.repository.TransferRepository;
 
+@Service
 public class TransferService {
 
 	@Autowired

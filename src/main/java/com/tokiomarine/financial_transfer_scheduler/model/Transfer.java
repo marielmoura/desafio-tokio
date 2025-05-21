@@ -3,10 +3,12 @@ package com.tokiomarine.financial_transfer_scheduler.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Transfer {
 
     @Id

@@ -1,1 +1,9 @@
 services:
+  h2:
+    image: oscarfonts/h2
+    container_name: h2-db
+    ports:
+      - "1521:1521"
+      - "81:81"
+    environment:
+      H2_OPTIONS: '-ifNotExists'

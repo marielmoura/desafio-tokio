@@ -1,6 +1,8 @@
 package com.tokiomarine.financial_transfer_scheduler.controller;
 
-import java.util.List;
+import java.util.Set;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tokiomarine.financial_transfer_scheduler.dto.TransferRequestDTO;
-import com.tokiomarine.financial_transfer_scheduler.model.Transfer;
+import com.tokiomarine.financial_transfer_scheduler.dto.TransferResponseDTO;
 import com.tokiomarine.financial_transfer_scheduler.service.TransferService;
 
 @RestController
@@ -23,14 +25,14 @@ public class TransferController {
 	private TransferService transferService;
 
     @PostMapping
-    public ResponseEntity<Transfer> schedule(@RequestBody TransferRequestDTO dto) {
-        Transfer transfer = transferService.schedule(dto);
+    public ResponseEntity<TransferResponseDTO> schedule(@Valid @RequestBody TransferRequestDTO dto) {
+        TransferResponseDTO transfer = transferService.schedule(dto);
         return new ResponseEntity<>(transfer, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Transfer>> listAll() {
-        List<Transfer> transfers = transferService.listAll();
+    public ResponseEntity<Set<TransferResponseDTO>> listAll() {
+        Set<TransferResponseDTO> transfers = transferService.listAll();
         return ResponseEntity.ok(transfers);
     }
 }

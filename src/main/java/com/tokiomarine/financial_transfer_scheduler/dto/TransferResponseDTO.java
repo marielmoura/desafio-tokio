@@ -5,13 +5,13 @@ import java.time.LocalDate;
 
 public class TransferResponseDTO {
 
-	 private Long id;
-    private String sourceAccount;
-    private String destinationAccount;
-    private BigDecimal amount;
-    private BigDecimal fee;
-    private LocalDate transferDate;
-    private LocalDate schedulingDate;
+	private Long id;
+	private String sourceAccount;
+	private String destinationAccount;
+	private BigDecimal amount;
+	private BigDecimal fee;
+	private LocalDate transferDate;
+	private LocalDate schedulingDate;
 
 	public TransferResponseDTO() {
 	}

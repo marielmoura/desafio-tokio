@@ -7,12 +7,15 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class TransferRequestDTO {
 
 	@NotBlank(message = "{sourceAccount.notblank}")
+	@Pattern(regexp = "\\d{10}", message = "{account.tenDigits}")
 	private String sourceAccount;
 
+	@Pattern(regexp = "\\d{10}", message = "{account.tenDigits}")
 	@NotBlank(message = "{destinationAccount.notblank}")
 	private String destinationAccount;
 

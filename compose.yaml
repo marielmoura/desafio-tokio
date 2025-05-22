@@ -1,9 +1,9 @@
 services:
-  app:
+  financial-transfer-scheduler-api:
     build: .
-    container_name: financial-transfer-scheduler
+    container_name: financial-transfer-scheduler-api
     ports:
-      - "8080:8080"
+      - "8081:8081"
     depends_on:
       - h2
   h2:
@@ -14,3 +14,13 @@ services:
       - "81:81"
     environment:
       H2_OPTIONS: '-ifNotExists'
+
+  financial-transfer-scheduler-front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: financial-transfer-scheduler-front
+    ports:
+      - "8080:80"
+    depends_on:
+      - financial-transfer-scheduler-api

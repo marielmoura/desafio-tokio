@@ -42,8 +42,8 @@ class TransferControllerTest {
 
 	@BeforeEach
 	void setUp() {
-		validRequest = createTransferRequest("123456", "654321", valueOf(1000.0), LocalDate.now().plusDays(5));
-		invalidRequest = createTransferRequest("", "654321", BigDecimal.valueOf(-100.0), LocalDate.of(2023, 12, 1));
+		validRequest = createTransferRequest("5640641564", "5441454054", valueOf(1000.0), LocalDate.now().plusDays(5));
+		invalidRequest = createTransferRequest("", "5441454054", BigDecimal.valueOf(-100.0), LocalDate.of(2023, 12, 1));
 	}
 
 	@Test
@@ -57,8 +57,8 @@ class TransferControllerTest {
 				.content(asJsonString(validRequest)))
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.amount").value(1000.0))
-				.andExpect(jsonPath("$.sourceAccount").value("123456"))
-				.andExpect(jsonPath("$.destinationAccount").value("654321"))
+				.andExpect(jsonPath("$.sourceAccount").value("5640641564"))
+				.andExpect(jsonPath("$.destinationAccount").value("5441454054"))
 				.andExpect(jsonPath("$.transferDate").value(LocalDate.now().plusDays(5).toString()))
 				.andExpect(jsonPath("$.fee").value(valueOf(12.0)))
 				.andExpect(jsonPath("$.schedulingDate").value(LocalDate.now().toString()));
@@ -71,28 +71,28 @@ class TransferControllerTest {
 
 	@Test
 	void testSchedule_withBlankSourceAccount_shouldReturnBadRequest() throws Exception {
-		TransferRequestDTO request = createTransferRequest("", "654321", valueOf(1000.0), LocalDate.now().plusDays(5));
+		TransferRequestDTO request = createTransferRequest("", "5441454054", valueOf(1000.0), LocalDate.now().plusDays(5));
 
 		performBadRequestTest(request, "Conta de origem não pode estar em branco");
 	}
 
 	@Test
 	void testSchedule_withBlankDestinationAccount_shouldReturnBadRequest() throws Exception {
-		TransferRequestDTO request = createTransferRequest("123456", "", valueOf(1000.0), LocalDate.now().plusDays(5));
+		TransferRequestDTO request = createTransferRequest("5640641564", "", valueOf(1000.0), LocalDate.now().plusDays(5));
 
 		performBadRequestTest(request, "Conta de destino não pode estar em branco");
 	}
 
 	@Test
 	void testSchedule_withNullAmount_shouldReturnBadRequest() throws Exception {
-		TransferRequestDTO request = createTransferRequest("123456", "654321", null, LocalDate.now().plusDays(5));
+		TransferRequestDTO request = createTransferRequest("5640641564", "5441454054", null, LocalDate.now().plusDays(5));
 
 		performBadRequestTest(request, "Valor é obrigatório");
 	}
 
 	@Test
 	void testSchedule_withPastTransferDate_shouldReturnBadRequest() throws Exception {
-		TransferRequestDTO request = createTransferRequest("123456", "654321", valueOf(1000.0),
+		TransferRequestDTO request = createTransferRequest("5640641564", "5441454054", valueOf(1000.0),
 				LocalDate.now().minusDays(1));
 
 		performBadRequestTest(request, "A data da transferência deve ser hoje ou no futuro");

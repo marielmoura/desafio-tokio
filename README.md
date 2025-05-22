@@ -10,26 +10,30 @@ Este projeto é uma aplicação para agendamento de transferências financeiras.
 - **API RESTful**: A comunicação com o cliente é feita por meio de uma API RESTful, seguindo boas práticas de design de APIs.
 
 ## Ferramentas e Tecnologias
-- **Linguagem**: Java
+- **Linguagem**: Java 11
 - **Framework**: Spring
 - **Banco de Dados**: H2
 - **Gerenciador de Dependências**: Maven
-- **Outras Ferramentas**: Docker, Docker Compose, Swagger
+- **Outras Ferramentas**: Docker, Docker Compose, Swagger, Vuejs
 
 ## Instruções para Subida do Projeto
-1. Clone o repositório:
+1. Clone este repositório:
 	```bash
-	git clone https://github.com/seu-usuario/financial-transfer-scheduler.git
-	cd financial-transfer-scheduler
+	git clone git@github.com:seu-usuario/desafio-tokio.git
+	cd desafio-tokio
 	```
 
-2. Suba o ambiente com Docker Compose:
+2. Instale o Docker Compose (caso ainda não tenha instalado):
+	- Siga as instruções oficiais para instalação do Docker Compose: [Docker Compose Install](https://docs.docker.com/compose/install/)
+
+3. Suba o ambiente com Docker Compose:
 	```bash
 	docker-compose up --build
 	```
 
 3. Acesse a aplicação:
-	- A API estará disponível em: `http://localhost:8080`
+	- A API estará disponível em: `http://localhost:8081`
+	- O front estará disponível em: `http://localhost:8080`
 
 4. Token
 	- Use o token gerado pelo endpoint de autenticação para acessar os endpoints
@@ -42,7 +46,7 @@ mvn test
 
 ## Endpoints
 
-### POST /auth/login
+### POST /api/auth/login
 Realiza a autenticação do usuário.
 
 - **Descrição**: Permite que um usuário faça login e receba um token JWT para autenticação.
@@ -63,18 +67,18 @@ Realiza a autenticação do usuário.
 		"Invalid credentials"
 		```
 
-### POST /transfers
+### POST /api/transfers
 Agenda uma transferência financeira.
 
 ### Exemplo de Requisição com cURL
 
 ```bash
-curl --location 'http://localhost:8080/transfers' \
+curl --location 'http://localhost:8081/api/transfers' \
 --header 'Authorization: Bearer <seu_token_jwt>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-	"sourceAccount": "123456",
-	"destinationAccount": "654321",
+	"sourceAccount": "5640641564",
+	"destinationAccount": "5441454054",
 	"amount": 100.50,
 	"transferDate": "2023-12-01"
 }'
@@ -104,13 +108,13 @@ curl --location 'http://localhost:8080/transfers' \
 		}
 		```
 
-### GET /transfers
+### GET /api/transfers
 Lista todas as transferências agendadas.
 
 ### Exemplo de Requisição com cURL
 
 ```bash
-curl --location 'http://localhost:8080/transfers' \
+curl --location 'http://localhost:8081/api/transfers' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <seu_token_jwt>'
 ```
